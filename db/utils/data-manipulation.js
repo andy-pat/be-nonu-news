@@ -1,43 +1,41 @@
 // extract any functions you are using to manipulate your data, into this file
 
-exports.formatTimestamp = (articles) => {
+exports.formatTimestampProperty = (object) => {
 
-    return articles.map(({ created_at, ...otherProps }) => {
+    return object.map(({ created_at, ...otherProps }) => {
 
-        const formattedArticle = {
+        const formattedObject = {
             ...otherProps,
-            created_at: new Date(created_at)
+            created_at: new Date(created_at).toDateString()
         }
-        return formattedArticle
+        return formattedObject
     })
 }
 
-
-exports.createArticleRef = (rows) => {
+exports.createArticleReference = (articles) => {
     const referenceObj = {};
-    rows.forEach((row) => {
-      const keys = Object.keys(row);
-      referenceObj[row[keys[1]]] = row[keys[0]];
+    articles.forEach((article) => {
+        const keys = Object.keys(article);
+        referenceObj[article[keys[1]]] = article[keys[0]];
     });
     return referenceObj;
-  }
-
-
+}
 
 exports.formatCommentData = (comments, referenceObj) => {
     return comments.map(({ created_by, belongs_to, ...otherProps }) => {
 
-        const formattedComment = {
-            ...otherProps,
+        const newComment = {
+            created_by,
+            belongs_to,
+            ...otherProps
         }
 
-        formattedComment.author = formattedComment.created_by
-        formattedComment.article_id = referenceObj[formattedComment.belongs_to]
-        delete formattedComment.belongs_to
-        delete formattedComment.created_by
-        console.log(formattedComment)
+        newComment.author = newComment.created_by;
+        delete newComment.created_by;
+        newComment.article_id = referenceObj[newComment.belongs_to]
+        delete newComment.belongs_to
 
-        return formattedComment;
+        return newComment;
     })
 
 }

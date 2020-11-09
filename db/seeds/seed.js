@@ -5,37 +5,59 @@ const {
   userData,
 } = require('../data/index.js');
 
-const { formatTimestamp, formatCommentData, createArticleRef } = require('../utils/data-manipulation')
+const { formatTimestampProperty, formatCommentData, createArticleReference } = require('../utils/data-manipulation')
 
 exports.seed = function (knex) {
 
+  // ROLLING BACK PREVIOUS MIGRATIONS AND MIGRATING TO LATEST
   return knex.migrate
     .rollback()
     .then(() => {
       return knex.migrate.latest();
     }).then(() => {
+
+      // INSERTING TOPIC DATA
       return knex
         .insert(topicData)
         .into('topics')
         .returning('*')
-    }).then(() => {
+    }).then((topicRows) => {
+      console.log(`Inserted ${topicRows.length} Topics`)
+
+      // INSERTING USER DATA
       return knex
         .insert(userData)
         .into('users')
         .returning('*')
-    }).then(() => {
-      const formattedArticleData = formatTimestamp(articleData)
+    }).then((userRows) => {
+      console.log(`Inserted ${userRows.length} Users`)
+
+      // CHANGING TIMESTAMP ON ARTICLE DATA
+      const formattedArticles = formatTimestampProperty(articleData)
+
+      // INSERTING ARTICLE DATA
       return knex
-        .insert(formattedArticleData)
+        .insert(formattedArticles)
         .into('articles')
         .returning('*')
-        .then(articles => {
-          const articleRef = createArticleRef(articles)
-          const formatComment = formatCommentData(commentData, articleRef)
+        .then(articlesRows => {
+
+          // REFORMATTING COMMENTS DATA
+          const articleRef = createArticleReference(articlesRows)
+          const comments = formatTimestampProperty(commentData)
+          const formattedComments = formatCommentData(comments, articleRef)
+
+          // INSERTING COMMENT DATA
+          return knex
+            .insert(formattedComments)
+            .into('comments')
+            .returning('*')
+        }).then(commentsRows => {
+          console.log(`Inserted ${commentsRows.length} Comments`)
         })
-      
+
     });
-  }
+}
 
 
 
