@@ -13,28 +13,33 @@ exports.formatTimestamp = (articles) => {
 }
 
 
-exports.createArticleReference = (articles) => {
-    const articleRef = {}
-    articleRef[articles.comment_id] = articles.title
-    return articleRef;
+exports.createArticleRef = (rows) => {
+    const referenceObj = {};
+    rows.forEach((row) => {
+      const keys = Object.keys(row);
+      referenceObj[row[keys[1]]] = row[keys[0]];
+    });
+    return referenceObj;
+  }
 
-}
 
 
-
-exports.formatCommentData = (comments) => {
-
+exports.formatCommentData = (comments, referenceObj) => {
     return comments.map(({ created_by, belongs_to, ...otherProps }) => {
 
         const formattedComment = {
             ...otherProps,
         }
 
-        formattedComment.author = created_by
+        formattedComment.author = formattedComment.created_by
+        formattedComment.article_id = referenceObj[formattedComment.belongs_to]
         delete formattedComment.belongs_to
-        formattedComment.belongs_to
+        delete formattedComment.created_by
+        console.log(formattedComment)
+
         return formattedComment;
     })
 
 }
+
 
