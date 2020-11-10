@@ -41,7 +41,7 @@ exports.seed = function (knex) {
         .into('articles')
         .returning('*')
         .then(articlesRows => {
-
+          console.log(`Inserted ${articlesRows.length} Articles`)
           // REFORMATTING COMMENTS DATA
           const articleRef = createArticleReference(articlesRows)
           const comments = formatTimestampProperty(commentData)
