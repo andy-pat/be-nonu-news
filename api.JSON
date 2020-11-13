@@ -1,0 +1,40 @@
+{ "api": {
+   "/api/topics": "GET",
+  
+   "/api/articles": ["GET", "POST"],
+   "/api/articles/:article_id": ["GET", "PATCH", "DELETE"],
+   "/api/articles/:article_id/comments": ["GET", "POST"],
+
+   "/api/users/:username": "GET",
+
+} }
+
+
+
+{
+    "api": {
+        "GET": [
+            "/api",
+            "/api/topics",
+            "/api/articles",
+            "/api/users",
+            "/api/articles/:article_id",
+            "/api/articles/:article_id/comments",
+            "/api/users/:username",
+        ],
+        "POST": [
+            "/api/articles",
+            "/api/topics",
+            "/api/users"
+        ],
+        "PATCH": [
+            "/api/articles/:article_id",
+            "/api/comments/:comment_id"
+        ],
+        "DELETE": [
+            "/api/articles/:article_id",
+            "/api/comments/:comment_id"
+        ] 
+
+    }
+}
