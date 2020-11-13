@@ -11,7 +11,7 @@ describe.only("/api", () => {
     return connection.destroy();
   });
   describe("GET", () => {
-    xtest("JSON of all available endpoints", () => {
+    test("JSON of all available endpoints", () => {
       return request(app)
         .get("/api")
         .expect(200)
@@ -62,6 +62,12 @@ describe.only("/api", () => {
   });
   describe("/users", () => {
     describe("GET", () => {
+      test("reqsponds with all users", () => {
+          return request(app)
+          .get("/api/users")
+          .expect(200)
+          .then((res) => {})
+        })
       test("respoonds with user data by username", () => {
         return request(app)
           .get("/api/users/butter_bridge")

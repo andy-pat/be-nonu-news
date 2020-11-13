@@ -1,15 +1,16 @@
 {
-  "GET /api": {
+  "GET": {
+  "/api": {
     "description": "serves up a json representation of all the available endpoints of the api"
   },
-  "GET /api/topics": {
+  "/api/topics": {
     "description": "serves an array of all topics",
     "queries": [],
     "exampleResponse": {
       "topics": [{ "slug": "football", "description": "Footie!" }]
     }
   },
-  "GET /api/articles": {
+  "/api/articles": {
     "description": "serves an array of all topics",
     "queries": ["author", "topic", "sort_by", "order"],
     "exampleResponse": {
@@ -23,5 +24,63 @@
         }
       ]
     }
+  },
+  "/api/users": {
+    "description": "serves an array of all users",
+    "queries": [],
+    "exampleResponse": {
+
+    }
+  },
+  "/api/articles/:article_id": {
+    "description": "",
+    "queries": [],
+    "exampleResponse": {
+      
+    }
+  },
+  "/api/articles/:article_id/comments": {
+    "description": "",
+    "queries": [],
+    "exampleResponse": {
+      
+    }
+  },
+  "/api/users/:username": {
+    "description": "",
+    "queries": [],
+    "exampleResponse": {
+      
+    }
   }
+  },
+  "POST" : {
+    "/api/articles": {
+
+    },
+    "/api/topics": {
+
+    },
+    "/api/users": {
+
+    }
+  },
+  "PATCH": {
+    "/api/articles/:article_id": {
+
+    },
+    "/api/comments/:comment_id" : {
+
+    }
+  },
+  "DELETE": {
+    "/api/articles/:article_id": {
+
+    },
+    "/api/comments/:comment_id": {
+
+    }
+  }
+
 }
+
