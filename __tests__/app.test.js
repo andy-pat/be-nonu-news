@@ -16,7 +16,6 @@ describe.only("/api", () => {
         .get("/api")
         .expect(200)
         .then((api) => {
-          console.log(api);
         });
     });
   });
@@ -36,6 +35,30 @@ describe.only("/api", () => {
           });
       });
     });
+    describe("POST", () => {
+      test("create new topic, check length of get all topics increased", () => {
+        return request(app)
+        .post("/api/topics")
+        .send({
+          slug: "fretless bass",
+          description: "swim with the dolphins"
+        })
+        .expect(201)
+        .then (() => {
+          return request(app)
+          .get("/api/topics")
+          .expect(200)
+          .then((res) => {
+            expect(res.body.topics).toEqual(expect.any(Array));
+            expect(Object.keys(res.body.topics[0])).toEqual(
+              expect.arrayContaining(["slug", "description"])
+            );
+            expect(res.body.topics.length).toBe(4);
+          });
+        })
+      })
+  
+    })
   });
   describe("/users", () => {
     describe("GET", () => {
@@ -368,7 +391,7 @@ describe.only("/api", () => {
         });
     });
     test("invalid methods on path", () => {
-      const invalidMethods = ["patch", "put", "post", "delete"];
+      const invalidMethods = ["patch", "put", "delete"];
       const methodsPromises = invalidMethods.map((method) => {
         return request(app)
           [method]("/api/topics")

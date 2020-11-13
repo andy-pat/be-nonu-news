@@ -1,15 +1,3 @@
-{ "api": {
-   "/api/topics": "GET",
-  
-   "/api/articles": ["GET", "POST"],
-   "/api/articles/:article_id": ["GET", "PATCH", "DELETE"],
-   "/api/articles/:article_id/comments": ["GET", "POST"],
-
-   "/api/users/:username": "GET",
-
-} }
-
-
 
 {
     "api": {

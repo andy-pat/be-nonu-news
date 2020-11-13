@@ -8,3 +8,9 @@ exports.fetchTopics = () => {
             return topicsRows
         })
 }
+
+exports.createTopic = (topic) => {
+    return connection('topics')
+    .returning('*')
+    .insert([{slug: topic.slug, description: topic.description}])
+}
