@@ -1,4 +1,6 @@
+const { DB_URL } = process.env;
 const ENV = process.env.NODE_ENV || 'development';
+
 
 const baseConfig = {
   client: 'pg',
@@ -24,7 +26,15 @@ const customConfig = {
       username: 'andy',
       password: 'fuckpsql'
     }
-  }
+  },
+  production: {
+    connection: {
+      connectionString: DB_URL,
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    },
+  },
 };
 
 module.exports = { ...customConfig[ENV], ...baseConfig };
