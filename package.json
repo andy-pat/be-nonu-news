@@ -10,13 +10,8 @@
     "test": "jest app.test.js",
     "migrate-make": "knex migrate:make",
     "migrate-latest": "knex migrate:latest",
-    "migrate-rollback": "knex migrate:rollback",
-    "seed:prod": "NODE_ENV=production DB_URL=$(heroku config:get postgres://xfwjvpspiblmsk:6ad45385b13cf8c4678d092940962104d67c14eb81b114c0aa57f52ae7a440ba@ec2-23-20-168-40.compute-1.amazonaws.com:5432/d1ouja5bo9vvot
-    ) knex seed:run",
-    "migrate-latest:prod": "NODE_ENV=production DB_URL=$(heroku config:get postgres://xfwjvpspiblmsk:6ad45385b13cf8c4678d092940962104d67c14eb81b114c0aa57f52ae7a440ba@ec2-23-20-168-40.compute-1.amazonaws.com:5432/d1ouja5bo9vvot
-    ) knex migrate:latest",
-    "migrate-rollback:prod": "NODE_ENV=production DB_URL=$(heroku config:get postgres://xfwjvpspiblmsk:6ad45385b13cf8c4678d092940962104d67c14eb81b114c0aa57f52ae7a440ba@ec2-23-20-168-40.compute-1.amazonaws.com:5432/d1ouja5bo9vvot
-    ) knex migrate:rollback"
+    "migrate-rollback": "knex migrate:rollback"
+    
   },
   "repository": {
     "type": "git",
