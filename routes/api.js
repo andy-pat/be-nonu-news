@@ -4,6 +4,9 @@ const usersRouter = require('./users')
 const articlesRouter = require('./articles')
 const commentsRouter = require('./comments')
 const { getEndpoints } = require('../controllers/api')
+const cors = require('cors')
+
+app.use(cors())
 
 apiRouter.route('/').get(getEndpoints)
 
