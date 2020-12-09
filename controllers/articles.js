@@ -29,6 +29,7 @@ exports.fetchArticles = (req, res, next) => {
   const order = req.query.order;
   const author = req.query.author;
   const topic = req.query.topic;
+  const comment_count = req.query.comment_count;
 
   getArticles(sortBy, order, author, topic)
     .then((articles) => {

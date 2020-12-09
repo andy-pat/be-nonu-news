@@ -150,6 +150,7 @@ describe.only("/api", () => {
             });
           });
       });
+
       test("responds with all article containing correct properties", () => {
         return request(app)
           .get("/api/articles")
@@ -186,6 +187,16 @@ describe.only("/api", () => {
               (article) => article.author === "butter_bridge"
             );
             expect(allAuthorsMatch).toBe(true);
+          });
+      });
+      test("sorts by comment count", () => {
+        return request(app)
+          .get("/api/articles?comment_count&order=desc")
+          .expect(200)
+          .then((res) => {
+            expect(res.body).toBeSortedBy("comment_count", {
+              ascending: "true",
+            });
           });
       });
       test("articles sorted by topic", () => {
