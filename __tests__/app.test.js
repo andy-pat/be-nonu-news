@@ -209,17 +209,15 @@ describe.only("/api", () => {
           .expect(200)
           .then((res) => {
             expect(res.body).toEqual({
-              updatedArticle: [
-                {
-                  article_id: 1,
-                  title: "Living in the shadow of a great man",
-                  body: "I find this existence challenging",
-                  votes: 101,
-                  topic: "mitch",
-                  created_at: "2018-11-15T00:00:00.000Z",
-                  author: "butter_bridge",
-                },
-              ],
+              updatedArticle: {
+                article_id: 1,
+                title: "Living in the shadow of a great man",
+                body: "I find this existence challenging",
+                votes: 101,
+                topic: "mitch",
+                created_at: "2018-11-15T00:00:00.000Z",
+                author: "butter_bridge",
+              },
             });
           });
       });
@@ -230,17 +228,15 @@ describe.only("/api", () => {
           .expect(200)
           .then((res) => {
             expect(res.body).toEqual({
-              updatedArticle: [
-                {
-                  article_id: 1,
-                  title: "Living in the shadow of a great man",
-                  body: "I find this existence challenging",
-                  votes: 99,
-                  topic: "mitch",
-                  created_at: "2018-11-15T00:00:00.000Z",
-                  author: "butter_bridge",
-                },
-              ],
+              updatedArticle: {
+                article_id: 1,
+                title: "Living in the shadow of a great man",
+                body: "I find this existence challenging",
+                votes: 99,
+                topic: "mitch",
+                created_at: "2018-11-15T00:00:00.000Z",
+                author: "butter_bridge",
+              },
             });
           });
       });

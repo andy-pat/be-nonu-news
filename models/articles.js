@@ -44,8 +44,8 @@ exports.patchArticleVotes = (id, vote) => {
     .returning("*")
     .where("article_id", id)
     .increment("votes", vote)
-    .then((updatedArticle) => {
-      return updatedArticle;
+    .then((updatedArticles) => {
+      return updatedArticles[0];
     });
 };
 
