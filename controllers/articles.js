@@ -15,9 +15,9 @@ exports.fetchComments = (req, res, next) => {
   const order = req.query.order;
   getComments(id, sortBy, order)
     .then((comments) => {
-        if (comments.length === 0) {
-            return Promise.reject({ status: 404, msg: "Article not found."})
-        }
+      if (comments.length === 0) {
+        return Promise.reject({ status: 404, msg: "Article not found." });
+      }
       res.status(200).send(comments);
     })
     .catch((error) => {
@@ -32,7 +32,7 @@ exports.fetchArticles = (req, res, next) => {
 
   getArticles(sortBy, order, author, topic)
     .then((articles) => {
-        console.log
+      console.log;
       res.status(200).send({ articles });
     })
     .catch((err) => {
@@ -67,7 +67,7 @@ exports.fetchArticle = (req, res, next) => {
   const id = req.params.article_id;
   getArticle(id)
     .then((article) => {
-      if (article.length === 0) {
+      if (article === undefined) {
         return Promise.reject({ status: 404, msg: "Article not found." });
       }
       res.status(200).send({ article });
@@ -78,15 +78,15 @@ exports.fetchArticle = (req, res, next) => {
 };
 
 exports.addArticle = (req, res, next) => {
-    const body = req.body
-    postArticle(body)
-        .then((article) => {
-            res.status(201).send({ article })
-        })
-        .catch((error) => {
-          next(error);
-        });
-}
+  const body = req.body;
+  postArticle(body)
+    .then((article) => {
+      res.status(201).send({ article });
+    })
+    .catch((error) => {
+      next(error);
+    });
+};
 
 exports.addComment = (req, res, next) => {
   const id = req.params.article_id;

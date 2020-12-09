@@ -15,8 +15,7 @@ describe.only("/api", () => {
       return request(app)
         .get("/api")
         .expect(200)
-        .then((api) => {
-        });
+        .then((api) => {});
     });
   });
 
@@ -38,36 +37,35 @@ describe.only("/api", () => {
     describe("POST", () => {
       test("create new topic, check length of get all topics increased", () => {
         return request(app)
-        .post("/api/topics")
-        .send({
-          slug: "fretless bass",
-          description: "swim with the dolphins"
-        })
-        .expect(201)
-        .then (() => {
-          return request(app)
-          .get("/api/topics")
-          .expect(200)
-          .then((res) => {
-            expect(res.body.topics).toEqual(expect.any(Array));
-            expect(Object.keys(res.body.topics[0])).toEqual(
-              expect.arrayContaining(["slug", "description"])
-            );
-            expect(res.body.topics.length).toBe(4);
+          .post("/api/topics")
+          .send({
+            slug: "fretless bass",
+            description: "swim with the dolphins",
+          })
+          .expect(201)
+          .then(() => {
+            return request(app)
+              .get("/api/topics")
+              .expect(200)
+              .then((res) => {
+                expect(res.body.topics).toEqual(expect.any(Array));
+                expect(Object.keys(res.body.topics[0])).toEqual(
+                  expect.arrayContaining(["slug", "description"])
+                );
+                expect(res.body.topics.length).toBe(4);
+              });
           });
-        })
-      })
-  
-    })
+      });
+    });
   });
   describe("/users", () => {
     describe("GET", () => {
       test("reqsponds with all users", () => {
-          return request(app)
+        return request(app)
           .get("/api/users")
           .expect(200)
-          .then((res) => {})
-        })
+          .then((res) => {});
+      });
       test("respoonds with user data by username", () => {
         return request(app)
           .get("/api/users/butter_bridge")
@@ -93,18 +91,16 @@ describe.only("/api", () => {
           .expect(200)
           .then((res) => {
             expect(res.body).toEqual({
-              article: [
-                {
-                  article_id: 2,
-                  title: "Sony Vaio; or, The Laptop",
-                  body:
-                    "Call me Mitchell. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would buy a laptop about a little and see the codey part of the world. It is a way I have of driving off the spleen and regulating the circulation. Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people’s hats off—then, I account it high time to get to coding as soon as I can. This is my substitute for pistol and ball. With a philosophical flourish Cato throws himself upon his sword; I quietly take to the laptop. There is nothing surprising in this. If they but knew it, almost all men in their degree, some time or other, cherish very nearly the same feelings towards the the Vaio with me.",
-                  votes: 0,
-                  topic: "mitch",
-                  created_at: "2014-11-16T00:00:00.000Z",
-                  author: "icellusedkars",
-                },
-              ],
+              article: {
+                article_id: 2,
+                title: "Sony Vaio; or, The Laptop",
+                body:
+                  "Call me Mitchell. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would buy a laptop about a little and see the codey part of the world. It is a way I have of driving off the spleen and regulating the circulation. Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people’s hats off—then, I account it high time to get to coding as soon as I can. This is my substitute for pistol and ball. With a philosophical flourish Cato throws himself upon his sword; I quietly take to the laptop. There is nothing surprising in this. If they but knew it, almost all men in their degree, some time or other, cherish very nearly the same feelings towards the the Vaio with me.",
+                votes: 0,
+                topic: "mitch",
+                created_at: "2014-11-16T00:00:00.000Z",
+                author: "icellusedkars",
+              },
             });
           });
       });
@@ -253,16 +249,15 @@ describe.only("/api", () => {
     describe("POST", () => {
       test("post article", () => {
         return request(app)
-        .post("/api/articles")
-        .send({
-            title: 'new article',
-            topic: 'mitch',
-            author: 'icellusedkars',
-            body:
-              'heres a new body',
+          .post("/api/articles")
+          .send({
+            title: "new article",
+            topic: "mitch",
+            author: "icellusedkars",
+            body: "heres a new body",
           })
-        .expect(201)
-      })
+          .expect(201);
+      });
       test("post comment to article with correct properties", () => {
         return request(app)
           .post("/api/articles/1/comments")
@@ -374,19 +369,20 @@ describe.only("/api", () => {
     });
     test("post article - malformed body, missing topic", () => {
       return request(app)
-      .post("/api/articles")
-      .send({
-          title: 'new article',
-          topic: 'not a topic',
-          author: 'icellusedkars',
-          body:
-            'heres a new body',
+        .post("/api/articles")
+        .send({
+          title: "new article",
+          topic: "not a topic",
+          author: "icellusedkars",
+          body: "heres a new body",
         })
-      .expect(400)
-      .then((res) => {
-        expect(res.body.msg).toBe("insert into \"articles\" (\"author\", \"body\", \"title\", \"topic\") values ($1, $2, $3, $4) returning * - insert or update on table \"articles\" violates foreign key constraint \"articles_topic_foreign\"")
-      })
-    })
+        .expect(400)
+        .then((res) => {
+          expect(res.body.msg).toBe(
+            'insert into "articles" ("author", "body", "title", "topic") values ($1, $2, $3, $4) returning * - insert or update on table "articles" violates foreign key constraint "articles_topic_foreign"'
+          );
+        });
+    });
     test("post comment - malformed body / missing required fields", () => {
       return request(app)
         .post("/api/articles/1/comments")
