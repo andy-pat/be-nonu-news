@@ -19,7 +19,7 @@ exports.getArticles = (
     )
     .count("comments.article_id AS comment_count")
     .from("articles")
-    .leftJoin("comments", "articles.author", "=", "comments.author")
+    .leftJoin("comments", "articles.article_id", "=", "comments.article_id")
     .groupBy("articles.article_id")
     .orderBy(sortBy, order)
     .modify((query) => {
