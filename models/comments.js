@@ -6,7 +6,7 @@ exports.patchVotes = (id, vote) => {
     .where("comment_id", id)
     .increment("votes", vote)
     .then((updated) => {
-      return updated;
+      return updated[0];
     });
 };
 
