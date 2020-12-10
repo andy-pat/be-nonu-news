@@ -45,6 +45,7 @@ exports.patchArticleVotes = (id, vote) => {
     .where("article_id", id)
     .increment("votes", vote)
     .then((updated) => {
+      console.log(updated);
       return updated[0];
     });
 };

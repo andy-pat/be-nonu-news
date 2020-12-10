@@ -56,7 +56,7 @@ exports.updateArticleVotes = (req, res, next) => {
   const id = req.params.article_id;
   const vote = req.body.inc_votes;
   patchArticleVotes(id, vote)
-    .then((updatedArticle) => {
+    .then((votes) => {
       res.status(200).send(votes);
     })
     .catch((error) => {
