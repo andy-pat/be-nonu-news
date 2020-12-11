@@ -90,7 +90,6 @@ exports.getComments = (id, sortBy = "comments.created_at", order = "desc") => {
     .where("article_id", id)
     .orderBy(sortBy, order)
     .then((comments) => {
-      console.log(comments);
       return comments;
     });
 };

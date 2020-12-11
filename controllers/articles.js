@@ -15,9 +15,9 @@ exports.fetchComments = (req, res, next) => {
   const order = req.query.order;
   getComments(id, sortBy, order)
     .then((comments) => {
-      // if (comments[0] === undefined) {
-      //   return Promise.reject({ status: 404, msg: "No comments." });
-      // }
+      if (comments[0] === undefined) {
+        return Promise.reject({ status: 404, msg: "No comments." });
+      }
       res.status(200).send(comments);
     })
     .catch((error) => {
