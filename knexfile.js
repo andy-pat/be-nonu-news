@@ -16,14 +16,14 @@ const customConfig = {
     connection: {
       database: "nc_news",
       username: "andy",
-      password: "fuckpsql",
+      password: "",
     },
   },
   test: {
     connection: {
       database: "nc_news_test",
       username: "andy",
-      password: "fuckpsql",
+      password: "",
     },
   },
   production: {
